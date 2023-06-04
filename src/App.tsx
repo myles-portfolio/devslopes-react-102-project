@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "@/css/App.css";
-import { LogIn } from "@/components/LogIn";
-import { SignUp } from "@/components/SignUp";
+import { LogIn } from "@/components/authentication/LogIn";
+import { SignUp } from "@/components/authentication/SignUp";
+import { Header } from "@/components/base/Header";
 
 function App() {
 	const [displayedForm, setDisplayedForm] = useState("login");
@@ -12,7 +13,8 @@ function App() {
 
 	return (
 		<main className="App">
-			<div>
+			<Header />
+			<div className="user-auth">
 				{displayedForm === "login" ? (
 					<LogIn onFormSwitch={toggleForm} />
 				) : (
