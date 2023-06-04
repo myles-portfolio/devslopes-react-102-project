@@ -16,12 +16,19 @@
 	--clr-white: #ffffff;
 
 	--bg: #f2f2f2;
+	--bg-header: #1a1a1a;
+}
+
+*,
+::after,
+::before {
+	box-sizing: border-box;
 }
 
 a {
 	font-weight: 500;
 	color: #646cff;
-	text-decoration: inherit;
+	text-decoration: none;
 }
 a:hover {
 	color: #de0150;
@@ -33,6 +40,12 @@ body {
 	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
 }
 
 h1 {
@@ -58,4 +71,12 @@ button:hover {
 button:focus,
 button:focus-visible {
 	outline: 4px auto #ffffff;
+}
+
+.container {
+	width: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: auto;
+	margin-right: auto;
 }

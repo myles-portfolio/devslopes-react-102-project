@@ -11,7 +11,7 @@ export const SignUp = ({ onFormSwitch }: SignUpProps) => {
 	const [pwConfirm, setPwConfirm] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
-	const [postalCode, setPostalCode] = useState(12345);
+	const [postalCode, setPostalCode] = useState<string | number>();
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -38,7 +38,7 @@ export const SignUp = ({ onFormSwitch }: SignUpProps) => {
 				setLastName(value);
 				break;
 			case "postalCode":
-				setPostalCode(Number(value));
+				setPostalCode(+value);
 				break;
 			default:
 				break;
