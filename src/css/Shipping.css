@@ -1,0 +1,71 @@
+.shipping-container {
+	display: flex;
+	flex-direction: column;
+	background: var(--bg-screen);
+	width: 100%;
+	border-radius: 8px;
+	padding: 1rem;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+}
+
+.shipping-header {
+	display: flex;
+	align-self: flex-start;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+}
+
+.shipping-header:last-of-type {
+	margin-top: 1rem;
+}
+
+.shipping-form {
+	margin: 1rem 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-self: flex-start;
+}
+
+.form-row,
+.form-col {
+	display: flex;
+	align-items: center;
+}
+
+.form-row.multi-col,
+.form-row.method {
+	gap: 1rem;
+}
+
+.form-row.method a {
+	font-size: 0.8rem;
+}
+
+.form-row input {
+	margin-bottom: 0;
+}
+
+.form-col #postal-code,
+.form-col select {
+	width: 100px;
+}
+
+.form-col select {
+	padding: 0.5rem;
+	border-radius: 8px;
+	background: var(--bg-accent);
+	border: transparent;
+}
+
+.leading-label {
+	width: 150px;
+}
+
+.shipping-form .btn-secondary.method {
+	max-width: 150px;
+	font-size: 0.8rem;
+	margin-top: 2rem;
+}
