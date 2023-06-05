@@ -8,7 +8,7 @@ export const Alert = () => {
 			</div>
 			<div className="alert-text">
 				<p>1 out of stock item removed:</p>
-				<p>Todo App, Simple, Single-Form</p>
+				<p>Registration Form, Simple, Single-Modal</p>
 			</div>
 			<i className="fa-solid fa-xmark"></i>
 		</div>

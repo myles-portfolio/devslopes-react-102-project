@@ -1,0 +1,26 @@
+.cart-price-container,
+.cart-price-ul ul {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	gap: 0.5rem;
+}
+
+.cart-price-li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+#total p:first-of-type,
+#subtotal p:last-of-type,
+#hosting p:last-of-type,
+#discount p:last-of-type {
+	font-weight: 600;
+}
+
+#total p:last-of-type {
+	color: var(--clr-primary);
+	font-size: 1.2rem;
+	font-weight: 700;
+}

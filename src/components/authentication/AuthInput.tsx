@@ -9,7 +9,7 @@ type InputProps = {
 	subtext: string;
 };
 
-export const Input = ({
+export const AuthInput = ({
 	label,
 	id,
 	type,

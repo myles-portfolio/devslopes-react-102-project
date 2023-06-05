@@ -13,11 +13,11 @@
 	flex-direction: column;
 	gap: 1rem;
 	flex-grow: 1;
-	flex-basis: 66.66%;
+	flex-basis: 75%;
 }
 
 .screen-right {
 	flex-grow: 1;
-	flex-basis: 33.33%;
+	flex-basis: 25%;
 	align-self: stretch;
 }

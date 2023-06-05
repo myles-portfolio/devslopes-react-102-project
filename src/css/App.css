@@ -20,3 +20,9 @@
 	right: 0;
 	bottom: 0;
 }
+
+.divider {
+	width: 100%;
+	height: 1px;
+	background: var(--bg-accent);
+}

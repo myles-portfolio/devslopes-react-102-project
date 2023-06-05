@@ -1,7 +1,7 @@
 import "@/css/Screen.css";
 import { Alert } from "@/components/cart/Alert";
 import { ProductTable } from "@/components/cart/ProductTable";
-import { Summary } from "@/components/cart/Summary";
+import { Summary } from "@/components/cart/summary/Summary";
 
 export const Screen = () => {
 	return (

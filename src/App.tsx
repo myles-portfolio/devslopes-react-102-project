@@ -2,8 +2,8 @@ import { useState } from "react";
 import "@/css/App.css";
 import { LogIn } from "@/components/authentication/LogIn";
 import { SignUp } from "@/components/authentication/SignUp";
-import { Header } from "@/components/base/Header";
-import { Screen } from "./components/base/Screen";
+import { Header } from "@/components/default/Header";
+import { Screen } from "./components/default/Screen";
 
 function App() {
 	const [displayedForm, setDisplayedForm] = useState("login");
