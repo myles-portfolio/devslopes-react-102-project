@@ -1,0 +1,11 @@
+.summary-container {
+	display: flex;
+	flex-direction: column;
+	background: var(--bg-screen);
+	width: 100%;
+	border-radius: 8px;
+	padding: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
