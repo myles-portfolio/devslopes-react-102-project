@@ -2,15 +2,22 @@ import "@/css/Tracker.css";
 
 export const Tracker = () => {
 	return (
-		<div className="alert-container">
-			<div className="alert-icon">
-				<i className="fa-solid fa-triangle-exclamation"></i>
+		<div className="tracker-container">
+			<div id="cart" className="tracker-circle">
+				<i className="fa-solid fa-cart-shopping"></i>
 			</div>
-			<div className="alert-text">
-				<p>1 out of stock item removed:</p>
-				<p>Registration Form, Simple, Single-Modal</p>
+			<div className="tracker-line"></div>
+			<div id="billing" className="tracker-circle">
+				<i className="fa-solid fa-truck"></i>
 			</div>
-			<i className="fa-solid fa-xmark"></i>
+			<div className="tracker-line"></div>
+			<div id="payment" className="tracker-circle">
+				<i className="fa-regular fa-credit-card"></i>
+			</div>
+			<div className="tracker-line"></div>
+			<div id="confirmation" className="tracker-circle">
+				<i className="fa-solid fa-check"></i>
+			</div>
 		</div>
 	);
 };
