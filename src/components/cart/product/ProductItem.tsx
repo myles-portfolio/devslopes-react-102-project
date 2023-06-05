@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "@/css/Product.css";
-import { Divider } from "../default/Divider";
+import { Divider } from "../../default/Divider";
 
 export const ProductItem = () => {
 	const [quantity, setQuantity] = useState(1);

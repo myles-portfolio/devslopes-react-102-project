@@ -1,7 +1,7 @@
 import "@/css/Product.css";
 import { ProductItem } from "./ProductItem";
 
-export const ProductTable = () => {
+export const ProductItemsDisplay = () => {
 	return (
 		<div className="product-container">
 			<div className="product-header">

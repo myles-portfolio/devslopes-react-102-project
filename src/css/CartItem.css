@@ -1,0 +1,61 @@
+.cart-item-container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	align-items: center;
+}
+
+.ci-img img {
+	width: 75px;
+	max-width: 100%;
+	height: 100px;
+	object-fit: cover;
+	object-position: bottom;
+	margin: 0.5rem 0;
+}
+
+.ci-overview {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-right: 15px;
+}
+
+.ci-overview h3 {
+	margin: 0;
+}
+
+.ci-title {
+	margin-bottom: 1rem;
+	text-align: left;
+}
+
+.ci-detail-container {
+	display: flex;
+	align-items: flex-end;
+	gap: 1rem;
+}
+
+.ci-detail {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	font-size: 0.8rem;
+}
+
+.ci-detail-name {
+	margin-right: 5px;
+	font-size: 0.8rem;
+}
+
+.ci-detail-desc {
+	font-weight: 600;
+	font-size: 0.8rem;
+}
+
+.cdc-left {
+	display: flex;
+}
+
+.cdc-right h4 {
+	font-size: 0.8rem;
+}

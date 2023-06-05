@@ -1,6 +1,6 @@
 import "@/css/Screen.css";
 import { Alert } from "@/components/cart/Alert";
-import { ProductTable } from "@/components/cart/ProductTable";
+import { ProductItemsDisplay } from "@/components/cart/product/ProductItemsDisplay";
 import { Summary } from "@/components/cart/summary/Summary";
 
 export const Screen = () => {
@@ -8,7 +8,7 @@ export const Screen = () => {
 		<section className="screen-container">
 			<div className="screen-left">
 				<Alert />
-				<ProductTable />
+				<ProductItemsDisplay />
 			</div>
 			<div className="screen-right">
 				<Summary />
