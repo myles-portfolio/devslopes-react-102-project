@@ -1,0 +1,25 @@
+.confirmation-container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-self: center;
+	align-items: center;
+}
+
+.confirmation-container i {
+	font-size: 3rem;
+	color: var(--clr-primary);
+	margin: 1rem 0;
+}
+
+.confirmation-container h2 {
+	margin: 0;
+}
+
+.btn-tertiary.confirm {
+	padding: 1.5rem 5rem;
+}
+
+.btn-secondary.confirm {
+	max-width: 250px;
+}

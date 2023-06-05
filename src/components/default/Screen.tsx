@@ -4,7 +4,8 @@ import { ProductItemsDisplay } from "@/components/cart/product/ProductItemsDispl
 import { Summary } from "@/components/cart/summary/Summary";
 import { Tracker } from "@/components/cart/Tracker";
 import { ShippingDisplay } from "@/components/cart/shipping/ShippingDisplay";
-import { Payment } from "../cart/payment/Payment";
+import { Payment } from "@/components/cart/Payment";
+import { Confirmation } from "@/components/cart/Confirmation";
 
 export const Screen = () => {
 	return (
@@ -15,6 +16,7 @@ export const Screen = () => {
 				<ProductItemsDisplay />
 				<ShippingDisplay />
 				<Payment />
+				<Confirmation />
 			</div>
 			<div className="screen-right">
 				<Summary />

@@ -14,6 +14,7 @@
 	--clr-discount: #7fbe3c;
 	--clr-primary: #de0150;
 	--clr-white: #ffffff;
+	--clr-black: #000000;
 	--clr-text-base: #1a1a1a;
 	--clr-text-light: #ffffff;
 
@@ -82,7 +83,7 @@ button {
 	font-weight: 500;
 	font-family: inherit;
 	background-color: #de0150;
-	color: white;
+	color: var(--clr-text-light);
 	cursor: pointer;
 	text-transform: uppercase;
 	transition: 0.3s ease-in-out;
@@ -94,6 +95,14 @@ button {
 	border: 1px solid var(--bg-header);
 	font-weight: 600;
 	color: var(--clr-text-base);
+}
+
+.btn-tertiary {
+	background-color: var(--clr-black);
+	border: none;
+	font-weight: 600;
+	color: var(--clr-text-light);
+	padding: 1.5rem 1rem;
 }
 
 button:hover {

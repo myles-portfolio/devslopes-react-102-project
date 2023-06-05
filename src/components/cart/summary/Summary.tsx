@@ -6,6 +6,7 @@ import { CartItemsCounter } from "./CartItemsCounter";
 import { CartItemsDisplay } from "./CartItemsDisplay";
 import { BillingAddress } from "@/components/cart/summary/BillingAddress";
 import { ShipMethod } from "./ShipMethod";
+import { OrderDetails } from "./OrderDetails";
 
 export const Summary = () => {
 	return (
@@ -20,7 +21,26 @@ export const Summary = () => {
 			<CartPrice />
 			<Divider />
 			<BillingAddress />
+			<Divider />
 			<ShipMethod />
+			<Divider />
+			<OrderDetails
+				title={"Shipping"}
+				detail={"Standard"}
+				description={"Delivery in 4-6 Business Weeks"}
+				linkUrl={"https://www.google.com/"}
+				linkText={"View Shipping Details"}
+			/>
+			<Divider />
+			<OrderDetails
+				title={"Payment"}
+				image={"src/assets/masterCard.png"}
+				detail={"MasterCard"}
+				description={"Payment Total"}
+				linkUrl={"https://www.google.com/"}
+				linkText={"View Shipping Details"}
+				paymentTotal={1919.98}
+			/>
 			<button className="checkout-btn">Checkout</button>
 		</div>
 	);
