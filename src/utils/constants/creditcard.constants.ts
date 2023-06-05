@@ -1,7 +1,7 @@
-import VISA_ICON from "./assets/visa.png";
-import AMERICAN_EXPRESS_ICON from "./assets/amex.png";
-import MASTER_CARD_ICON from "./assets/masterCard.png";
-import DISCOVER_ICON from "./assets/discover.png";
+import VISA_ICON from "@/assets/visa.png";
+import AMERICAN_EXPRESS_ICON from "@/assets/amex.png";
+import MASTER_CARD_ICON from "@/assets/masterCard.png";
+import DISCOVER_ICON from "@/assets/discover.png";
 
 export const OTHER_CARDS = [
 	/[1-9]/,

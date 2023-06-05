@@ -1,15 +1,17 @@
 import "@/css/Shipping.css";
+import "@/css/Form.css";
 import { Divider } from "@/components/default/Divider";
 import {
-	countries,
-	states,
-	cities,
+	COUNTRIES,
+	STATES,
+	CITIES,
 } from "@/utils/constants/location.constants";
+import { SectionHeader } from "@/components/default/SectionHeader";
 
 export const ShippingForm = () => {
 	return (
 		<div>
-			<h3 className="shipping-header">Shipping Information</h3>
+			<SectionHeader headerText={"Billing & Shipping"} />
 			<Divider />
 			<form className="shipping-form">
 				<div className="form-row">
@@ -40,7 +42,7 @@ export const ShippingForm = () => {
 					<div className="form-col">
 						<label htmlFor="country">Country:</label>
 						<select id="country" name="country">
-							{countries.map((country) => (
+							{COUNTRIES.map((country) => (
 								<option key={country} value={country}>
 									{country}
 								</option>
@@ -50,7 +52,7 @@ export const ShippingForm = () => {
 					<div className="form-col">
 						<label htmlFor="city">City:</label>
 						<select id="city" name="city">
-							{cities.map((city) => (
+							{CITIES.map((city) => (
 								<option key={city} value={city}>
 									{city}
 								</option>
@@ -60,7 +62,7 @@ export const ShippingForm = () => {
 					<div className="form-col">
 						<label htmlFor="state">State:</label>
 						<select id="state" name="state">
-							{states.map((state) => (
+							{STATES.map((state) => (
 								<option key={state} value={state}>
 									{state}
 								</option>

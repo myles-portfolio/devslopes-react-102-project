@@ -1,13 +1,13 @@
-.shipping-form {
-	margin: 1rem 0;
+.payment-form {
 	display: flex;
 	flex-direction: column;
+	margin-top: 1rem;
 	gap: 1rem;
-	align-self: flex-start;
 }
 
-.shipping-form .btn-secondary.method {
+.btn-secondary.payment {
 	max-width: 150px;
 	font-size: 0.8rem;
 	margin-top: 2rem;
+	margin-bottom: 1.5rem;
 }

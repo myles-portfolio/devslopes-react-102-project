@@ -4,6 +4,8 @@ import { CartPrice } from "./CartPrice";
 import { Divider } from "@/components/default/Divider";
 import { CartItemsCounter } from "./CartItemsCounter";
 import { CartItemsDisplay } from "./CartItemsDisplay";
+import { BillingAddress } from "@/components/cart/summary/BillingAddress";
+import { ShipMethod } from "./ShipMethod";
 
 export const Summary = () => {
 	return (
@@ -17,6 +19,8 @@ export const Summary = () => {
 			<Divider />
 			<CartPrice />
 			<Divider />
+			<BillingAddress />
+			<ShipMethod />
 			<button className="checkout-btn">Checkout</button>
 		</div>
 	);

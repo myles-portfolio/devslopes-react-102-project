@@ -1,9 +1,11 @@
 import "@/css/Shipping.css";
+import "@/css/Form.css";
+import { SectionHeader } from "@/components/default/SectionHeader";
 
 export const ShippingMethod = () => {
 	return (
 		<div>
-			<h3 className="shipping-header">Shipping Method</h3>
+			<SectionHeader headerText={"Shipping Method"} />
 			<form className="shipping-form">
 				<div className="form-row method">
 					<label className="leading-label">

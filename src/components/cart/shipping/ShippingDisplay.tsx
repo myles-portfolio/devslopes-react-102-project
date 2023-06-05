@@ -5,7 +5,7 @@ import { ShippingForm } from "./ShippingForm";
 
 export const ShippingDisplay = () => {
 	return (
-		<div className="shipping-container">
+		<div className="screen-style">
 			<ShippingForm />
 			<Divider />
 			<ShippingMethod />

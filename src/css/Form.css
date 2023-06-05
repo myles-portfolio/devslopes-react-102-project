@@ -6,6 +6,10 @@ label {
 	color: var(--clr-primary);
 }
 
+.leading-label {
+	width: 150px;
+}
+
 input {
 	margin: 0 0.5rem 0.5rem;
 	padding: 0.5rem;
@@ -61,4 +65,46 @@ input {
 
 .btn-toggle:hover {
 	border: none;
+}
+
+.form-header {
+	display: flex;
+	align-self: flex-start;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+}
+
+.form-header.method {
+	margin-top: 1rem;
+}
+
+.form-row,
+.form-col {
+	display: flex;
+	align-items: center;
+}
+
+.form-row.multi-col,
+.form-row.method {
+	gap: 1rem;
+}
+
+.form-row.method a {
+	font-size: 0.8rem;
+}
+
+.form-row input {
+	margin-bottom: 0;
+}
+
+.form-col #postal-code,
+.form-col select {
+	width: 100px;
+}
+
+.form-col select {
+	padding: 0.5rem;
+	border-radius: 8px;
+	background: var(--bg-accent);
+	border: transparent;
 }

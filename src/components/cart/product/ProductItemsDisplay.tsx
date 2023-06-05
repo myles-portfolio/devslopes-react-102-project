@@ -3,7 +3,7 @@ import { ProductItem } from "./ProductItem";
 
 export const ProductItemsDisplay = () => {
 	return (
-		<div className="product-container">
+		<div className="screen-style">
 			<div className="product-header">
 				<h3>Product</h3>
 				<h3>Price</h3>

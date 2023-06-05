@@ -1,5 +1,5 @@
-export const countries = ["", "USA"];
-export const cities = [
+export const COUNTRIES = ["", "USA"];
+export const CITIES = [
 	"",
 	"Aberdeen",
 	"Abilene",
@@ -387,7 +387,7 @@ export const cities = [
 	"York",
 	"Youngstown",
 ];
-export const states = [
+export const STATES = [
 	"",
 	"Alabama",
 	"Alaska",

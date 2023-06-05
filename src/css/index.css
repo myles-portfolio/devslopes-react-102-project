@@ -113,3 +113,10 @@ button:focus-visible {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.h3-header {
+	display: flex;
+	align-self: flex-start;
+	text-transform: uppercase;
+	margin: 1rem 0;
+}
