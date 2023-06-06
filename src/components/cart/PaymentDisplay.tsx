@@ -4,6 +4,8 @@ import { Divider } from "@/components/default/Divider";
 import { MONTHS } from "@/utils/constants/date.constants";
 import moment from "moment";
 import { SectionHeader } from "@/components/default/SectionHeader";
+import { Button } from "@/components/default/Button";
+import { DisplayProps } from "@/types/defaults";
 
 const years = () => {
 	const years = [];
@@ -16,10 +18,12 @@ const years = () => {
 	return years;
 };
 
-export const Payment: React.FC = () => {
+export const PaymentDisplay: React.FC<DisplayProps> = ({
+	handlePhaseTransition,
+}) => {
 	return (
 		<div className="screen-style">
-			<SectionHeader headerText={"Payment"} />
+			<SectionHeader headerText={"Payment Information"} />
 			<Divider />
 			<form className="payment-form">
 				<div className="form-row">
@@ -64,7 +68,11 @@ export const Payment: React.FC = () => {
 					<i className="fa-regular fa-circle-question"></i>
 				</div>
 			</form>
-			<button className="btn-secondary payment">Back to Billing</button>
+			<Button
+				onClick={() => handlePhaseTransition("prev")}
+				text={"Back to Delivery"}
+				className={"btn-secondary checkout"}
+			/>
 		</div>
 	);
 };

@@ -22,7 +22,6 @@ export const ShippingMethod = () => {
 					<p>Delivery in 1-3 Business Weeks - $100</p>
 					<a href="#">View Shipping Details</a>
 				</div>
-				<button className="btn-secondary method">Back to Cart</button>
 			</form>
 		</div>
 	);

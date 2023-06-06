@@ -14,13 +14,22 @@
 	justify-content: center;
 }
 
+.tracker-circle.complete,
+.tracker-line.complete {
+	background-color: #aaaaaa;
+}
+
 .tracker-circle i {
 	font-size: 1.25rem;
 	opacity: 0.3;
 }
 
+.tracker-circle i.complete {
+	opacity: 1;
+}
+
 .tracker-line {
 	width: 225px;
 	height: 10px;
-	background: var(--bg-accent);
+	background-color: var(--bg-accent);
 }

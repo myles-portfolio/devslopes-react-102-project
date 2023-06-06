@@ -5,9 +5,3 @@
 	gap: 1rem;
 	align-self: flex-start;
 }
-
-.shipping-form .btn-secondary.method {
-	max-width: 150px;
-	font-size: 0.8rem;
-	margin-top: 2rem;
-}
