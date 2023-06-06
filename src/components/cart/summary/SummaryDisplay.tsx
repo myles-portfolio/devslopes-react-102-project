@@ -8,7 +8,7 @@ import { BillingAddress } from "@/components/cart/summary/BillingAddress";
 import { ShipMethod } from "./ShipMethod";
 import { OrderDetails } from "./OrderDetails";
 
-export const Summary = () => {
+export const SummaryDisplay = () => {
 	return (
 		<div className="summary-container">
 			<h3 className="summary-header">Summary</h3>

@@ -2,7 +2,7 @@ import { SectionHeader } from "@/components/default/SectionHeader";
 import { Divider } from "@/components/default/Divider";
 import "@/css/Confirmation.css";
 
-export const Confirmation = () => {
+export const ConfirmationDisplay = () => {
 	return (
 		<div className="screen-style">
 			<SectionHeader headerText={"Confirmation"} />

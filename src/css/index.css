@@ -90,11 +90,21 @@ button {
 	margin: 0.5rem 0;
 }
 
+.btn-primary.checkout {
+	margin-top: auto;
+}
+
 .btn-secondary {
 	background-color: var(--clr-white);
 	border: 1px solid var(--bg-header);
 	font-weight: 600;
 	color: var(--clr-text-base);
+}
+
+.btn-secondary.checkout {
+	max-width: 150px;
+	font-size: 0.8rem;
+	margin-top: 2rem;
 }
 
 .btn-tertiary {
