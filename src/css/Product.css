@@ -40,12 +40,17 @@
 	padding-left: 50px;
 }
 
+.pi-delete i:hover {
+	opacity: 0.5;
+}
+
 .pi-delete i {
 	font-size: 2rem;
 	opacity: 0.2;
 	position: absolute;
 	left: 5px;
 	top: 100px;
+	transition: 0.3s ease-in-out;
 }
 
 .pi-img img {

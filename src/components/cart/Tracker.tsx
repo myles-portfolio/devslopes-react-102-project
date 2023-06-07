@@ -6,8 +6,6 @@ interface TrackerProps {
 }
 
 export const Tracker: React.FC<TrackerProps> = ({ currentCheckoutPhase }) => {
-	console.log("Phase:", currentCheckoutPhase);
-
 	const isPhaseComplete = (phase: string): boolean => {
 		const phaseOrder = ["cartReview", "shipping", "payment", "confirmation"];
 		const currentPhaseIndex = phaseOrder.indexOf(currentCheckoutPhase);
