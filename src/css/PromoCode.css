@@ -23,6 +23,7 @@ input#promo {
 	height: 40px;
 	transition: 0.3s ease-in-out;
 	padding: 0 0.5rem;
+	margin-top: 1rem;
 }
 
 .promo-form button.btn-secondary:hover {
@@ -33,5 +34,5 @@ input#promo {
 .promoError {
 	font-size: 0.7rem;
 	font-weight: 700;
-	color: red;
+	color: var(--clr-primary);
 }

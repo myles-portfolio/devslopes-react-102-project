@@ -93,7 +93,7 @@ function App() {
 						<Divider />
 						<PromoCodeForm setDiscount={setDiscount} />
 						<Divider />
-						<CartPrice activeCartData={activeCart} />
+						<CartPrice activeCartData={activeCart} discount={discount} />
 						<Divider />
 					</>
 				);
@@ -105,7 +105,7 @@ function App() {
 						<Divider />
 						<CartItemsDisplay />
 						<Divider />
-						<CartPrice activeCartData={activeCart} />
+						<CartPrice activeCartData={activeCart} discount={discount} />
 						<Divider />
 					</>
 				);
@@ -117,7 +117,7 @@ function App() {
 						<Divider />
 						<CartItemsDisplay />
 						<Divider />
-						<CartPrice activeCartData={activeCart} />
+						<CartPrice activeCartData={activeCart} discount={discount} />
 						<Divider />
 						<BillingAddress />
 						<ShipMethod />

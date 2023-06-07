@@ -12,6 +12,10 @@
 	align-items: center;
 }
 
+.discount-applied {
+	color: var(--clr-highlight);
+}
+
 #total p:first-of-type,
 #subtotal p:last-of-type,
 #hosting p:last-of-type,

@@ -14,8 +14,8 @@ interface PromoCodeFormProps {
 
 export const PromoCodeForm = ({ setDiscount }: PromoCodeFormProps) => {
 	const [promoCodeInput, setPromoCodeInput] = useState("");
-	const [isErrorVisible, setIsErrorVisible] = useState(false);
-	const [errorType, setErrorType] = useState("");
+	const [isMsgVisible, setIsMsgVisible] = useState(false);
+	const [msgType, setMsgType] = useState("");
 	const [isDiscountApplied, setIsDiscountApplied] = useState(false);
 
 	const handlePromoCodeChange = (
@@ -34,14 +34,16 @@ export const PromoCodeForm = ({ setDiscount }: PromoCodeFormProps) => {
 		if (matchingPromoCode) {
 			if (isDiscountApplied === false) {
 				setDiscount(matchingPromoCode.discount);
+				setMsgType("redeemed successfully");
+				setIsMsgVisible(true);
 				setIsDiscountApplied(true);
 			} else {
-				setErrorType("already used");
-				setIsErrorVisible(true);
+				setMsgType("already used");
+				setIsMsgVisible(true);
 			}
 		} else {
-			setErrorType("invalid");
-			setIsErrorVisible(true);
+			setMsgType("invalid");
+			setIsMsgVisible(true);
 		}
 
 		event.currentTarget.reset();
@@ -60,9 +62,7 @@ export const PromoCodeForm = ({ setDiscount }: PromoCodeFormProps) => {
 				/>
 				<button className="btn-secondary">Apply</button>
 			</form>
-			{isErrorVisible && (
-				<p className="promoError">Sorry. Code is {errorType}.</p>
-			)}
+			{isMsgVisible && <p className="promoError">Code is {msgType}.</p>}
 		</div>
 	);
 };
