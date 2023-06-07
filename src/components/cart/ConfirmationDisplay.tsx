@@ -1,5 +1,5 @@
-import { SectionHeader } from "@/components/default/SectionHeader";
-import { Divider } from "@/components/default/Divider";
+import { SectionHeader } from "@/components/common/SectionHeader";
+import { Divider } from "@/components/common/Divider";
 import "@/css/Confirmation.css";
 
 export const ConfirmationDisplay = () => {

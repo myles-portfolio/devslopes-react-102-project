@@ -1,4 +1,4 @@
-import { SectionHeader } from "@/components/default/SectionHeader";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export const BillingAddress = () => {
 	return (

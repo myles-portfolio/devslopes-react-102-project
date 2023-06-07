@@ -1,12 +1,12 @@
 type InputProps = {
-	label: string;
+	label?: string;
 	id: string;
 	type: string;
 	value: string | number;
 	placeholderText: string;
 	handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	tag: string;
-	subtext: string;
+	tag?: string;
+	subtext?: string;
 };
 
 export const Input = ({
@@ -21,7 +21,7 @@ export const Input = ({
 }: InputProps) => {
 	return (
 		<div className="input-field">
-			<label className="input-label">{label}</label>
+			{label && <label className="input-label">{label}</label>}
 			<div className="input-row">
 				<input
 					id={id}

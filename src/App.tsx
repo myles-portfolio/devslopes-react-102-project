@@ -2,27 +2,45 @@ import { useState } from "react";
 import "@/css/App.css";
 import { LogIn } from "@/components/authentication/LogIn";
 import { SignUp } from "@/components/authentication/SignUp";
-import { Header } from "@/components/default/Header";
+import { Header } from "@/components/common/Header";
 import { Alert } from "@/components/cart/Alert";
 import { ConfirmationDisplay } from "@/components/cart/ConfirmationDisplay";
 import { PaymentDisplay } from "@/components/cart/PaymentDisplay";
 import { Tracker } from "@/components/cart/Tracker";
 import { ProductItemsDisplay } from "@/components/cart/product/ProductItemsDisplay";
 import { ShippingDisplay } from "@/components/cart/shipping/ShippingDisplay";
-import { BillingAddress } from "./components/cart/summary/BillingAddress";
-import { CartItemsCounter } from "./components/cart/summary/CartItemsCounter";
-import { CartItemsDisplay } from "./components/cart/summary/CartItemsDisplay";
-import { CartPrice } from "./components/cart/summary/CartPrice";
+import { BillingAddress } from "@/components/cart/summary/BillingAddress";
+
 import { OrderDetails } from "./components/cart/summary/OrderDetails";
-import { PromoCodeForm } from "./components/cart/summary/PromoCodeForm";
+import {
+	Discount,
+	PromoCodeForm,
+} from "./components/cart/summary/PromoCodeForm";
 import { ShipMethod } from "./components/cart/summary/ShipMethod";
-import { Divider } from "./components/default/Divider";
-import { Button } from "./components/default/Button";
+import { Divider } from "./components/common/Divider";
+import { Button } from "./components/common/Button";
+import { activeCartData, deletedCartData } from "@/utils/cart";
+import { CartPrice } from "@/components/cart/summary/CartPrice";
+import { CartItemsCounter } from "@/components/cart/summary/CartItemsCounter";
+import { CartItemsDisplay } from "./components/cart/summary/CartItemsDisplay";
+import { CartProps } from "@/types/defaults";
 
 function App() {
 	const [displayedForm, setDisplayedForm] = useState("login");
 	const [currentCheckoutPhase, setCurrentCheckoutPhase] =
 		useState("cartReview");
+	const [activeCart, setActiveCart] = useState<CartProps[]>(activeCartData);
+	const [discount, setDiscount] = useState<Discount | null>(null);
+
+	console.log("Discount:", discount);
+
+	const handleItemRemoval = (item: CartProps) => {
+		const updatedActiveCart = activeCart.filter(
+			(cartItem) => cartItem.sku !== item.sku
+		);
+		setActiveCart(updatedActiveCart);
+		deletedCartData.push(item);
+	};
 
 	const toggleForm = (formName: string) => {
 		setDisplayedForm(formName);
@@ -35,7 +53,10 @@ function App() {
 					<>
 						<Alert />
 						<Tracker currentCheckoutPhase={currentCheckoutPhase} />
-						<ProductItemsDisplay />
+						<ProductItemsDisplay
+							activeCartData={activeCart}
+							handleItemRemoval={handleItemRemoval}
+						/>
 					</>
 				);
 			case "shipping":
@@ -70,9 +91,9 @@ function App() {
 				return (
 					<>
 						<Divider />
-						<PromoCodeForm />
+						<PromoCodeForm setDiscount={setDiscount} />
 						<Divider />
-						<CartPrice />
+						<CartPrice activeCartData={activeCart} />
 						<Divider />
 					</>
 				);
@@ -84,7 +105,7 @@ function App() {
 						<Divider />
 						<CartItemsDisplay />
 						<Divider />
-						<CartPrice />
+						<CartPrice activeCartData={activeCart} />
 						<Divider />
 					</>
 				);
@@ -96,7 +117,7 @@ function App() {
 						<Divider />
 						<CartItemsDisplay />
 						<Divider />
-						<CartPrice />
+						<CartPrice activeCartData={activeCart} />
 						<Divider />
 						<BillingAddress />
 						<ShipMethod />

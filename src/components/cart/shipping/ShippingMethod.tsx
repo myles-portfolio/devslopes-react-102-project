@@ -1,6 +1,6 @@
 import "@/css/Shipping.css";
 import "@/css/Form.css";
-import { SectionHeader } from "@/components/default/SectionHeader";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export const ShippingMethod = () => {
 	return (

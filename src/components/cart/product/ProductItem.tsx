@@ -1,38 +1,26 @@
 import { useState } from "react";
 import "@/css/Product.css";
-import { Divider } from "../../default/Divider";
+import { Divider } from "@/components/common/Divider";
 import { priceFormatter } from "@/utils/helpers/action.helpers";
-import { handleClose } from "@/utils/helpers/action.helpers";
+import { CartProps } from "@/types/defaults";
 
 interface ProductItemProps {
-	item: {
-		type: string;
-		title: string;
-		img: string;
-		imgAlt: string;
-		pid2first: string;
-		pid2second: string;
-		price: number;
-		totalPrice: number;
-	};
+	item: CartProps;
+	handleItemRemoval: () => void;
 }
 
-export const ProductItem = ({ item }: ProductItemProps) => {
+export const ProductItem = ({ item, handleItemRemoval }: ProductItemProps) => {
 	const [quantity, setQuantity] = useState(1);
 	const [calculatedTotalPrice, setCalculatedTotalPrice] = useState(
-		item.totalPrice
+		item.totalPrice ?? 0
 	);
-
-	const handleItemRemoval = () => {
-		handleClose("product-item");
-	};
 
 	const handleQuantityChange = (
 		event: React.ChangeEvent<HTMLSelectElement>
 	) => {
 		const selectedQuantity = parseInt(event.target.value);
 		setQuantity(selectedQuantity);
-		const updatedTotalPrice = selectedQuantity * item.totalPrice;
+		const updatedTotalPrice = selectedQuantity * (item.totalPrice ?? 0);
 		setCalculatedTotalPrice(updatedTotalPrice);
 	};
 

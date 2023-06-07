@@ -1,10 +1,10 @@
 import "@/css/Form.css";
 import "@/css/Payment.css";
-import { Divider } from "@/components/default/Divider";
+import { Divider } from "@/components/common/Divider";
 import { MONTHS } from "@/utils/constants/date.constants";
 import moment from "moment";
-import { SectionHeader } from "@/components/default/SectionHeader";
-import { Button } from "@/components/default/Button";
+import { SectionHeader } from "@/components/common/SectionHeader";
+import { Button } from "@/components/common/Button";
 import { DisplayProps } from "@/types/defaults";
 
 const years = () => {

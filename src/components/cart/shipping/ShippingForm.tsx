@@ -1,12 +1,12 @@
 import "@/css/Shipping.css";
 import "@/css/Form.css";
-import { Divider } from "@/components/default/Divider";
+import { Divider } from "@/components/common/Divider";
 import {
 	COUNTRIES,
 	STATES,
 	CITIES,
 } from "@/utils/constants/location.constants";
-import { SectionHeader } from "@/components/default/SectionHeader";
+import { SectionHeader } from "@/components/common/SectionHeader";
 
 export const ShippingForm = () => {
 	return (
