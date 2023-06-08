@@ -32,8 +32,6 @@ function App() {
 	const [activeCart, setActiveCart] = useState<CartProps[]>(activeCartData);
 	const [discount, setDiscount] = useState<Discount | null>(null);
 
-	console.log("Active Cart:", activeCart);
-
 	const handleItemRemoval = (item: CartProps) => {
 		const updatedActiveCart = activeCart.filter(
 			(cartItem) => cartItem.sku !== item.sku

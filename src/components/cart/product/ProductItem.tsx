@@ -30,7 +30,6 @@ export const ProductItem = ({
 		const updatedTotalPrice = (item.totalPrice || 0) * selectedQuantity;
 		setCalculatedTotalPrice(updatedTotalPrice);
 
-		// Update the quantity for the corresponding item in activeCart
 		const updatedActiveCart = activeCart.map((cartItem) => {
 			if (cartItem.sku === item.sku) {
 				return { ...cartItem, quantity: selectedQuantity };

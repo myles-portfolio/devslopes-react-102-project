@@ -12,14 +12,17 @@ interface CartPriceProps {
 }
 
 export const CartPrice = ({ activeCartData, discount }: CartPriceProps) => {
-	const subtotal = activeCartData.reduce((sum, item) => sum + item.price, 0);
+	const subtotal = activeCartData.reduce(
+		(sum, item) => sum + item.price * item.quantity,
+		0
+	);
 	const formattedSubtotal = priceFormatter.format(subtotal);
 
 	const hosting = subtotal * 0.2;
 	const formattedHosting = priceFormatter.format(hosting);
 
 	let formattedDiscount = "-";
-	let formattedTotal = "-"; // Default value
+	let formattedTotal = "-";
 
 	if (discount) {
 		const discountAmount = calculateDiscount(
