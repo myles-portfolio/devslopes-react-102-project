@@ -37,16 +37,18 @@ export const PromoCodeForm = ({ setDiscount }: PromoCodeFormProps) => {
 				setMsgType("redeemed successfully");
 				setIsMsgVisible(true);
 				setIsDiscountApplied(true);
+				setPromoCodeInput("");
+				window.setTimeout(() => setIsMsgVisible(false), 2000);
 			} else {
 				setMsgType("already used");
 				setIsMsgVisible(true);
+				window.setTimeout(() => setIsMsgVisible(false), 2000);
 			}
 		} else {
 			setMsgType("invalid");
 			setIsMsgVisible(true);
+			window.setTimeout(() => setIsMsgVisible(false), 2000);
 		}
-
-		event.currentTarget.reset();
 	};
 
 	return (

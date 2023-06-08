@@ -23,6 +23,10 @@
 	gap: 1rem;
 }
 
+.empty-cart {
+	margin: 10rem 0;
+}
+
 .product-list {
 	width: 100%;
 }

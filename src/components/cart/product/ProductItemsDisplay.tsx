@@ -1,6 +1,7 @@
 import "@/css/Product.css";
 import { ProductItem } from "@/components/cart/product/ProductItem";
 import { CartProps } from "@/types/defaults";
+import { EmptyCart } from "@/components/cart/product/EmptyCart";
 
 interface ProductItemsDisplayProps {
 	activeCartData: CartProps[];
@@ -24,13 +25,17 @@ export const ProductItemsDisplay = ({
 				<h3>Total Price</h3>
 			</div>
 			<div className="product-list">
-				{activeCartData.map((item: CartProps) => (
-					<ProductItem
-						key={item.sku}
-						item={{ ...item, totalPrice: calculateTotalPrice(item.price) }}
-						handleItemRemoval={() => handleItemRemoval(item)}
-					/>
-				))}
+				{activeCartData.length === 0 ? (
+					<EmptyCart />
+				) : (
+					activeCartData.map((item: CartProps) => (
+						<ProductItem
+							key={item.sku}
+							item={{ ...item, totalPrice: calculateTotalPrice(item.price) }}
+							handleItemRemoval={() => handleItemRemoval(item)}
+						/>
+					))
+				)}
 			</div>
 		</div>
 	);
