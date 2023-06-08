@@ -19,7 +19,7 @@ import {
 import { ShipMethod } from "./components/cart/summary/ShipMethod";
 import { Divider } from "./components/common/Divider";
 import { Button } from "./components/common/Button";
-import { activeCartData, deletedCartData } from "@/utils/cart";
+import { activeCartData, deletedCartData } from "@/data/cart";
 import { CartPrice } from "@/components/cart/summary/CartPrice";
 import { CartItemsCounter } from "@/components/cart/summary/CartItemsCounter";
 import { CartItemsDisplay } from "./components/cart/summary/CartItemsDisplay";
@@ -32,7 +32,7 @@ function App() {
 	const [activeCart, setActiveCart] = useState<CartProps[]>(activeCartData);
 	const [discount, setDiscount] = useState<Discount | null>(null);
 
-	console.log("Discount:", discount);
+	console.log("Active Cart:", activeCart);
 
 	const handleItemRemoval = (item: CartProps) => {
 		const updatedActiveCart = activeCart.filter(
@@ -56,6 +56,8 @@ function App() {
 						<ProductItemsDisplay
 							activeCartData={activeCart}
 							handleItemRemoval={handleItemRemoval}
+							activeCart={activeCart}
+							setActiveCart={setActiveCart}
 						/>
 					</>
 				);

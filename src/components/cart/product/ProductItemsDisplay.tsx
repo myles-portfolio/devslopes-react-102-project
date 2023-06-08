@@ -6,6 +6,8 @@ import { EmptyCart } from "@/components/cart/product/EmptyCart";
 interface ProductItemsDisplayProps {
 	activeCartData: CartProps[];
 	handleItemRemoval: (item: CartProps) => void;
+	activeCart: CartProps[];
+	setActiveCart: (cart: CartProps[]) => void;
 }
 
 const calculateTotalPrice = (price: number) => {
@@ -15,6 +17,8 @@ const calculateTotalPrice = (price: number) => {
 export const ProductItemsDisplay = ({
 	activeCartData,
 	handleItemRemoval,
+	setActiveCart,
+	activeCart,
 }: ProductItemsDisplayProps) => {
 	return (
 		<div className="screen-style">
@@ -33,6 +37,8 @@ export const ProductItemsDisplay = ({
 							key={item.sku}
 							item={{ ...item, totalPrice: calculateTotalPrice(item.price) }}
 							handleItemRemoval={() => handleItemRemoval(item)}
+							activeCart={activeCart}
+							setActiveCart={setActiveCart}
 						/>
 					))
 				)}

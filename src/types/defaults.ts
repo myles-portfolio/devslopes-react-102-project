@@ -4,6 +4,7 @@ export interface DisplayProps {
 
 export interface CartProps {
 	sku: string;
+	quantity: number;
 	type: string;
 	title: string;
 	img: string;

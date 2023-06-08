@@ -7,9 +7,16 @@ import { CartProps } from "@/types/defaults";
 interface ProductItemProps {
 	item: CartProps;
 	handleItemRemoval: () => void;
+	activeCart: CartProps[];
+	setActiveCart: (cart: CartProps[]) => void;
 }
 
-export const ProductItem = ({ item, handleItemRemoval }: ProductItemProps) => {
+export const ProductItem = ({
+	item,
+	handleItemRemoval,
+	setActiveCart,
+	activeCart,
+}: ProductItemProps) => {
 	const [quantity, setQuantity] = useState(1);
 	const [calculatedTotalPrice, setCalculatedTotalPrice] = useState(
 		item.totalPrice ?? 0
@@ -20,8 +27,17 @@ export const ProductItem = ({ item, handleItemRemoval }: ProductItemProps) => {
 	) => {
 		const selectedQuantity = parseInt(event.target.value);
 		setQuantity(selectedQuantity);
-		const updatedTotalPrice = selectedQuantity * (item.totalPrice ?? 0);
+		const updatedTotalPrice = (item.totalPrice || 0) * selectedQuantity;
 		setCalculatedTotalPrice(updatedTotalPrice);
+
+		// Update the quantity for the corresponding item in activeCart
+		const updatedActiveCart = activeCart.map((cartItem) => {
+			if (cartItem.sku === item.sku) {
+				return { ...cartItem, quantity: selectedQuantity };
+			}
+			return cartItem;
+		});
+		setActiveCart(updatedActiveCart);
 	};
 
 	const quantityOptions = Array.from({ length: 10 }, (_, index) => index + 1);
