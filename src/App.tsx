@@ -187,13 +187,17 @@ function App() {
 	const renderCheckoutButton = () => {
 		switch (currentCheckoutPhase) {
 			case "cartReview":
-				return (
-					<Button
-						onClick={() => handlePhaseTransition("next")}
-						text={"Checkout"}
-						className={"btn-primary checkout"}
-					/>
-				);
+				if (activeCartData.length === 0) {
+					return null;
+				} else {
+					return (
+						<Button
+							onClick={() => handlePhaseTransition("next")}
+							text={"Checkout"}
+							className={"btn-primary checkout"}
+						/>
+					);
+				}
 			case "shipping":
 				return (
 					<>
