@@ -19,7 +19,7 @@ import {
 import { ShipMethod } from "./components/cart/summary/ShipMethod";
 import { Divider } from "./components/common/Divider";
 import { Button } from "./components/common/Button";
-import { activeCartData, deletedCartData } from "@/utils/cart";
+import { activeCartData, deletedCartData } from "@/data/cart";
 import { CartPrice } from "@/components/cart/summary/CartPrice";
 import { CartItemsCounter } from "@/components/cart/summary/CartItemsCounter";
 import { CartItemsDisplay } from "./components/cart/summary/CartItemsDisplay";
@@ -31,8 +31,10 @@ function App() {
 		useState("cartReview");
 	const [activeCart, setActiveCart] = useState<CartProps[]>(activeCartData);
 	const [discount, setDiscount] = useState<Discount | null>(null);
+	const [expressShipping, setExpressShipping] = useState(false);
+	const [cartSubtotal, setCartSubtotal] = useState(0);
 
-	console.log("Discount:", discount);
+	//console.log("Subtotal:", cartSubtotal);
 
 	const handleItemRemoval = (item: CartProps) => {
 		const updatedActiveCart = activeCart.filter(
@@ -40,6 +42,14 @@ function App() {
 		);
 		setActiveCart(updatedActiveCart);
 		deletedCartData.push(item);
+	};
+
+	const handleExpressShippingChange = (isExpressShipping: boolean) => {
+		setExpressShipping(isExpressShipping);
+	};
+
+	const handleSubTotalChange = (value: number) => {
+		setCartSubtotal(value);
 	};
 
 	const toggleForm = (formName: string) => {
@@ -56,6 +66,8 @@ function App() {
 						<ProductItemsDisplay
 							activeCartData={activeCart}
 							handleItemRemoval={handleItemRemoval}
+							activeCart={activeCart}
+							setActiveCart={setActiveCart}
 						/>
 					</>
 				);
@@ -63,7 +75,11 @@ function App() {
 				return (
 					<>
 						<Tracker currentCheckoutPhase={currentCheckoutPhase} />
-						<ShippingDisplay handlePhaseTransition={handlePhaseTransition} />
+						<ShippingDisplay
+							handlePhaseTransition={handlePhaseTransition}
+							handleExpressShippingChange={handleExpressShippingChange}
+							cartSubtotal={cartSubtotal}
+						/>
 					</>
 				);
 			case "payment":
@@ -93,7 +109,12 @@ function App() {
 						<Divider />
 						<PromoCodeForm setDiscount={setDiscount} />
 						<Divider />
-						<CartPrice activeCartData={activeCart} discount={discount} />
+						<CartPrice
+							activeCartData={activeCart}
+							discount={discount}
+							isExpressShipping={expressShipping}
+							handleSubTotalChange={handleSubTotalChange}
+						/>
 						<Divider />
 					</>
 				);
@@ -105,7 +126,12 @@ function App() {
 						<Divider />
 						<CartItemsDisplay />
 						<Divider />
-						<CartPrice activeCartData={activeCart} discount={discount} />
+						<CartPrice
+							activeCartData={activeCart}
+							discount={discount}
+							isExpressShipping={expressShipping}
+							handleSubTotalChange={handleSubTotalChange}
+						/>
 						<Divider />
 					</>
 				);
@@ -117,7 +143,12 @@ function App() {
 						<Divider />
 						<CartItemsDisplay />
 						<Divider />
-						<CartPrice activeCartData={activeCart} discount={discount} />
+						<CartPrice
+							activeCartData={activeCart}
+							discount={discount}
+							isExpressShipping={expressShipping}
+							handleSubTotalChange={handleSubTotalChange}
+						/>
 						<Divider />
 						<BillingAddress />
 						<ShipMethod />
@@ -187,7 +218,7 @@ function App() {
 	const renderCheckoutButton = () => {
 		switch (currentCheckoutPhase) {
 			case "cartReview":
-				if (activeCartData.length === 0) {
+				if (activeCart.length === 0) {
 					return null;
 				} else {
 					return (

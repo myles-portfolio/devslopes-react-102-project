@@ -28,7 +28,7 @@ export const PaymentDisplay: React.FC<DisplayProps> = ({
 			<form className="payment-form">
 				<div className="form-row">
 					<label className="leading-label" htmlFor="cardholder-name">
-						First Name:
+						Name on Card:
 					</label>
 					<input type="text" id="cardholder-name" name="cardholder-name" />
 				</div>

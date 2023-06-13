@@ -5,14 +5,24 @@ import { ShippingForm } from "@/components/cart/shipping/ShippingForm";
 import { Button } from "@/components/common/Button";
 import { DisplayProps } from "@/types/defaults";
 
-export const ShippingDisplay: React.FC<DisplayProps> = ({
+interface ShippingDisplayProps extends DisplayProps {
+	handleExpressShippingChange: (value: boolean) => void;
+	cartSubtotal: number;
+}
+
+export const ShippingDisplay: React.FC<ShippingDisplayProps> = ({
 	handlePhaseTransition,
+	handleExpressShippingChange,
+	cartSubtotal,
 }) => {
 	return (
 		<div className="screen-style">
 			<ShippingForm />
 			<Divider />
-			<ShippingMethod />
+			<ShippingMethod
+				handleExpressShippingChange={handleExpressShippingChange}
+				cartSubtotal={cartSubtotal}
+			/>
 			<Button
 				onClick={() => handlePhaseTransition("prev")}
 				text={"Back to Cart"}

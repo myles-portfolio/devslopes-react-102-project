@@ -5,21 +5,38 @@ import {
 	calculateDiscount,
 } from "@/utils/helpers/action.helpers";
 import { Discount } from "./PromoCodeForm";
+import { useEffect } from "react";
 
 interface CartPriceProps {
 	activeCartData: CartProps[];
 	discount: Discount | null;
+	isExpressShipping: boolean;
+	handleSubTotalChange: (value: number) => void;
 }
 
-export const CartPrice = ({ activeCartData, discount }: CartPriceProps) => {
-	const subtotal = activeCartData.reduce((sum, item) => sum + item.price, 0);
+export const CartPrice = ({
+	activeCartData,
+	discount,
+	isExpressShipping,
+	handleSubTotalChange,
+}: CartPriceProps) => {
+	const subtotal = activeCartData.reduce(
+		(sum, item) => sum + item.price * item.quantity,
+		0
+	);
 	const formattedSubtotal = priceFormatter.format(subtotal);
 
-	const hosting = subtotal * 0.2;
+	let hosting;
+	if (isExpressShipping) {
+		hosting = subtotal * 0.2 + 100;
+	} else {
+		hosting = subtotal * 0.2;
+	}
+
 	const formattedHosting = priceFormatter.format(hosting);
 
 	let formattedDiscount = "-";
-	let formattedTotal = "-"; // Default value
+	let formattedTotal = "-";
 
 	if (discount) {
 		const discountAmount = calculateDiscount(
@@ -37,6 +54,10 @@ export const CartPrice = ({ activeCartData, discount }: CartPriceProps) => {
 		formattedTotal = priceFormatter.format(subtotal + hosting);
 	}
 
+	useEffect(() => {
+		handleSubTotalChange(subtotal);
+	}, [handleSubTotalChange, subtotal]);
+
 	return (
 		<div className="cart-price-container">
 			<div className="cart-price-ul">
@@ -46,7 +67,7 @@ export const CartPrice = ({ activeCartData, discount }: CartPriceProps) => {
 						<p className="subTotal">{formattedSubtotal}</p>
 					</div>
 					<div id="hosting" className="cart-price-li">
-						<p>Hosting:</p>
+						<p>Hosting + Shipping:</p>
 						<p className="Hosting">{formattedHosting}</p>
 					</div>
 					<div id="discount" className="cart-price-li">

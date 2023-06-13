@@ -10,6 +10,7 @@ export const activeCartData: CartProps[] = [
 		pid2first: "Mobile",
 		pid2second: "1.2 GB",
 		price: 1599.99,
+		quantity: 1,
 	},
 	{
 		sku: "APP0043D68",
@@ -20,6 +21,7 @@ export const activeCartData: CartProps[] = [
 		pid2first: "Web",
 		pid2second: "24.3 GB",
 		price: 2999.99,
+		quantity: 1,
 	},
 ];
 
