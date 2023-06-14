@@ -4,16 +4,19 @@ import { SectionHeader } from "@/components/common/SectionHeader";
 
 interface ShippingMethodProps {
 	handleExpressShippingChange: (value: boolean) => void;
+	setShippingCompleted: (value: boolean) => void;
 	cartSubtotal: number;
 }
 
 export const ShippingMethod = ({
 	handleExpressShippingChange,
 	cartSubtotal,
+	setShippingCompleted,
 }: ShippingMethodProps) => {
 	const handleShippingMethodChange = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
+		//I need to confirm that either standard or express has been selected, and if so set setShippingCompleted to true
 		let isExpressShipping = false;
 		const { value } = event.target;
 		if (value === "express") {
@@ -23,11 +26,12 @@ export const ShippingMethod = ({
 		}
 
 		handleExpressShippingChange(isExpressShipping);
+		setShippingCompleted(true);
 	};
 
 	return (
 		<div>
-			<SectionHeader headerText={"Shipping Method"} />
+			<SectionHeader headerText={"Shipping Method*"} />
 			<form className="shipping-form">
 				<div className="form-row method">
 					<label className="leading-label">
@@ -39,7 +43,9 @@ export const ShippingMethod = ({
 						/>
 						STANDARD
 					</label>
-					<p>Delivery in 4-6 Business Weeks - Free ($300 min.)</p>
+					<p>
+						Delivery in 4-6 Business Weeks - <strong>Free</strong> ($300 min.)
+					</p>
 				</div>
 				<div className="form-row method">
 					<label className="leading-label">
@@ -51,7 +57,9 @@ export const ShippingMethod = ({
 						/>
 						EXPRESS
 					</label>
-					<p>Delivery in 1-3 Business Weeks - $100</p>
+					<p>
+						Delivery in 1-3 Business Weeks - <strong>$100</strong>
+					</p>
 					<a href="#">View Shipping Details</a>
 				</div>
 			</form>

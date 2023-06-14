@@ -14,3 +14,18 @@ export interface CartProps {
 	price: number;
 	totalPrice?: number;
 }
+
+export type PhoneInputItem = {
+	id: string;
+	size: number;
+	maxLength: number;
+	name: string;
+	ref: React.RefObject<HTMLInputElement>;
+	nextRef?: React.RefObject<HTMLInputElement>;
+};
+
+export type PhoneInputs = {
+	cellPhone: PhoneInputItem[];
+	otherPhone: PhoneInputItem[];
+	[key: string]: PhoneInputItem[];
+};
