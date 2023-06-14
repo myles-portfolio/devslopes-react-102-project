@@ -7,7 +7,7 @@ import {
 	CITIES,
 } from "@/utils/constants/location.constants";
 import { SectionHeader } from "@/components/common/SectionHeader";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { PhoneInput } from "@/components/common/PhoneInput";
 import { PhoneInputItem, PhoneInputs } from "@/types/defaults";
 
@@ -23,6 +23,24 @@ interface ShippingFormProps {
 	setOtherPhoneCompleted: (value: boolean) => void;
 	isMsgVisible: boolean;
 	formErrors: string;
+	formValues: {
+		firstName: string;
+		lastName: string;
+		address: string;
+		postalCode: string;
+		country: string;
+		city: string;
+		state: string;
+		cell1: string;
+		cell2: string;
+		cell3: string;
+		other1: string;
+		other2: string;
+		other3: string;
+	};
+	handleFormChange: (
+		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => void;
 }
 
 export const ShippingForm = ({
@@ -37,20 +55,9 @@ export const ShippingForm = ({
 	setOtherPhoneCompleted,
 	isMsgVisible,
 	formErrors,
+	formValues,
+	handleFormChange,
 }: ShippingFormProps) => {
-	const [cellPhoneNumbers, setCellPhoneNumbers] = useState<string[]>([
-		"",
-		"",
-		"",
-	]);
-	const [otherPhoneNumbers, setOtherPhoneNumbers] = useState<string[]>([
-		"",
-		"",
-		"",
-	]);
-
-	console.log("Cell#:", cellPhoneNumbers);
-
 	const postalCodeRef = useRef<HTMLInputElement>(null);
 	const phone1Ref = useRef<HTMLInputElement>(null);
 	const phone2Ref = useRef<HTMLInputElement>(null);
@@ -68,6 +75,7 @@ export const ShippingForm = ({
 				name: "cell-phone1",
 				ref: phone1Ref,
 				nextRef: phone2Ref,
+				value: formValues.cell1,
 			},
 			{
 				id: "cell-phone2",
@@ -76,6 +84,7 @@ export const ShippingForm = ({
 				name: "cell-phone2",
 				ref: phone2Ref,
 				nextRef: phone3Ref,
+				value: formValues.cell2,
 			},
 			{
 				id: "cell-phone3",
@@ -83,6 +92,7 @@ export const ShippingForm = ({
 				maxLength: 4,
 				name: "cell-phone3",
 				ref: phone3Ref,
+				value: formValues.cell3,
 			},
 		],
 		otherPhone: [
@@ -93,6 +103,7 @@ export const ShippingForm = ({
 				name: "other-phone1",
 				ref: phone4Ref,
 				nextRef: phone5Ref,
+				value: formValues.other1,
 			},
 			{
 				id: "other-phone2",
@@ -101,6 +112,7 @@ export const ShippingForm = ({
 				name: "other-phone2",
 				ref: phone5Ref,
 				nextRef: phone6Ref,
+				value: formValues.other2,
 			},
 			{
 				id: "other-phone3",
@@ -108,6 +120,7 @@ export const ShippingForm = ({
 				maxLength: 4,
 				name: "other-phone3",
 				ref: phone6Ref,
+				value: formValues.other3,
 			},
 		],
 	};
@@ -137,13 +150,18 @@ export const ShippingForm = ({
 	};
 
 	useEffect(() => {
-		const joinedCellPhoneNumbers = cellPhoneNumbers.join("");
+		const joinedCellPhoneNumbers = `${formValues.cell1}${formValues.cell2}${formValues.cell3}`;
 		const cellPhoneCompleted = joinedCellPhoneNumbers.length === 10;
 		setCellPhoneCompleted(cellPhoneCompleted);
-	}, [cellPhoneNumbers, setCellPhoneCompleted]);
+	}, [
+		formValues.cell1,
+		formValues.cell2,
+		formValues.cell3,
+		setCellPhoneCompleted,
+	]);
 
 	useEffect(() => {
-		const joinedOtherPhoneNumbers = otherPhoneNumbers.join("");
+		const joinedOtherPhoneNumbers = `${formValues.other1}${formValues.other2}${formValues.other3}`;
 		let otherPhoneCompleted;
 		if (
 			joinedOtherPhoneNumbers.length === 0 ||
@@ -154,27 +172,12 @@ export const ShippingForm = ({
 			otherPhoneCompleted = false;
 		}
 		setOtherPhoneCompleted(otherPhoneCompleted);
-	}, [otherPhoneNumbers, setOtherPhoneCompleted]);
-
-	const updatePhoneNumbers = (
-		index: number,
-		value: string,
-		type: keyof PhoneInputs
-	) => {
-		if (type === "cellPhone") {
-			setCellPhoneNumbers((prevState) => {
-				const updatedNumbers = [...prevState];
-				updatedNumbers[index] = value;
-				return updatedNumbers;
-			});
-		} else if (type === "otherPhone") {
-			setOtherPhoneNumbers((prevState) => {
-				const updatedNumbers = [...prevState];
-				updatedNumbers[index] = value;
-				return updatedNumbers;
-			});
-		}
-	};
+	}, [
+		formValues.other1,
+		formValues.other2,
+		formValues.other3,
+		setOtherPhoneCompleted,
+	]);
 
 	const checkMaxLengthAndMoveFocus = (
 		index: number,
@@ -197,6 +200,26 @@ export const ShippingForm = ({
 		}
 	};
 
+	// const numberHandler = (
+	// 	e:
+	// 		| React.ChangeEvent<HTMLInputElement>
+	// 		| React.KeyboardEvent<HTMLInputElement>,
+	// 	index: number,
+	// 	type: keyof PhoneInputs
+	// ) => {
+	// 	const validatedValue = e.currentTarget.value.replace(/[^0-9]/g, "");
+	// 	updatePhoneNumbers(index, validatedValue, type);
+	// 	checkMaxLengthAndMoveFocus(index, type);
+
+	// 	if (
+	// 		validatedValue === "" &&
+	// 		e.nativeEvent instanceof KeyboardEvent &&
+	// 		e.nativeEvent.key === "Backspace"
+	// 	) {
+	// 		checkEmptyAndMoveFocus(index, type);
+	// 	}
+	// };
+
 	const numberHandler = (
 		e:
 			| React.ChangeEvent<HTMLInputElement>
@@ -205,7 +228,37 @@ export const ShippingForm = ({
 		type: keyof PhoneInputs
 	) => {
 		const validatedValue = e.currentTarget.value.replace(/[^0-9]/g, "");
-		updatePhoneNumbers(index, validatedValue, type);
+
+		// updatePhoneNumbers(index, validatedValue, type);
+
+		if (type === "cellPhone") {
+			const cell1 = index === 0 ? validatedValue : formValues.cell1;
+			const cell2 = index === 1 ? validatedValue : formValues.cell2;
+			const cell3 = index === 2 ? validatedValue : formValues.cell3;
+			handleFormChange({
+				target: { name: "cell1", value: String(cell1) },
+			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			handleFormChange({
+				target: { name: "cell2", value: String(cell2) },
+			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			handleFormChange({
+				target: { name: "cell3", value: String(cell3) },
+			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+		} else if (type === "otherPhone") {
+			const other1 = index === 0 ? validatedValue : formValues.other1;
+			const other2 = index === 1 ? validatedValue : formValues.other2;
+			const other3 = index === 2 ? validatedValue : formValues.other3;
+			handleFormChange({
+				target: { name: "other1", value: String(other1) },
+			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			handleFormChange({
+				target: { name: "other2", value: String(other2) },
+			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			handleFormChange({
+				target: { name: "other3", value: String(other3) },
+			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+		}
+
 		checkMaxLengthAndMoveFocus(index, type);
 
 		if (
@@ -234,38 +287,58 @@ export const ShippingForm = ({
 		const value = event.target.value;
 		const firstNameCompleted = value.length > 0;
 		setFirstNameCompleted(firstNameCompleted);
+		handleFormChange(event);
 	};
+
 	const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		const lastNameCompleted = value.length > 0;
 		setLastNameCompleted(lastNameCompleted);
+		handleFormChange(event);
 	};
+
 	const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		const addressCompleted = value.length > 0;
 		setAddressCompleted(addressCompleted);
+		handleFormChange(event);
 	};
+
 	const handlePostalCodeChange = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
+		event.persist();
+
 		const value = event.target.value;
 		const postalCodeCompleted = value.length > 0;
 		setPostalCodeCompleted(postalCodeCompleted);
+		const postalCodeValue = value === "" ? "" : value;
+
+		event.target.name = "postalCode";
+		event.target.value = postalCodeValue;
+
+		handleFormChange(event);
 	};
+
 	const handleCountryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const value = event.target.value;
 		const countryCompleted = value !== "";
 		setCountryCompleted(countryCompleted);
+		handleFormChange(event);
 	};
+
 	const handleCityChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const value = event.target.value;
 		const cityCompleted = value !== "";
 		setCityCompleted(cityCompleted);
+		handleFormChange(event);
 	};
+
 	const handleStateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const value = event.target.value;
 		const stateCompleted = value !== "";
 		setStateCompleted(stateCompleted);
+		handleFormChange(event);
 	};
 
 	return (
@@ -276,35 +349,38 @@ export const ShippingForm = ({
 			{isMsgVisible && <p className="error">{formErrors}</p>}
 			<form className="shipping-form">
 				<div className="form-row">
-					<label className="leading-label" htmlFor="first-name">
+					<label className="leading-label" htmlFor="firstName">
 						First Name*:
 					</label>
 					<input
 						type="text"
-						id="first-name"
-						name="first-name"
+						id="firstName"
+						name="firstName"
+						value={String(formValues.firstName)}
 						onChange={handleFirstNameChange}
 					/>
 				</div>
 				<div className="form-row">
-					<label className="leading-label" htmlFor="last-name">
+					<label className="leading-label" htmlFor="lastName">
 						Last Name*:
 					</label>
 					<input
 						type="text"
-						id="last-name"
-						name="last-name"
+						id="lastName"
+						name="lastName"
+						value={String(formValues.lastName)}
 						onChange={handleLastNameChange}
 					/>
 				</div>
 				<div className="form-row">
-					<label className="leading-label" htmlFor="billing-address">
+					<label className="leading-label" htmlFor="address">
 						Billing Address*:
 					</label>
 					<input
 						type="text"
-						id="billing-address"
-						name="billing-address"
+						id="address"
+						name="address"
+						value={String(formValues.address)}
 						onChange={handleAddressChange}
 					/>
 				</div>
@@ -315,8 +391,9 @@ export const ShippingForm = ({
 						</label>
 						<input
 							type="text"
-							id="postal-code"
-							name="postal-code"
+							id="postalCode"
+							name="postalCode"
+							value={String(formValues.postalCode)}
 							size={5}
 							maxLength={5}
 							ref={postalCodeRef}
@@ -326,7 +403,12 @@ export const ShippingForm = ({
 					</div>
 					<div className="form-col">
 						<label htmlFor="country">Country*:</label>
-						<select id="country" name="country" onChange={handleCountryChange}>
+						<select
+							id="country"
+							name="country"
+							value={String(formValues.country)}
+							onChange={handleCountryChange}
+						>
 							{COUNTRIES.map((country) => (
 								<option key={country} value={country}>
 									{country}
@@ -336,7 +418,12 @@ export const ShippingForm = ({
 					</div>
 					<div className="form-col">
 						<label htmlFor="city">City*:</label>
-						<select id="city" name="city" onChange={handleCityChange}>
+						<select
+							id="city"
+							name="city"
+							value={String(formValues.city)}
+							onChange={handleCityChange}
+						>
 							{CITIES.map((city) => (
 								<option key={city} value={city}>
 									{city}
@@ -346,7 +433,12 @@ export const ShippingForm = ({
 					</div>
 					<div className="form-col">
 						<label htmlFor="state">State*:</label>
-						<select id="state" name="state" onChange={handleStateChange}>
+						<select
+							id="state"
+							name="state"
+							value={String(formValues.state)}
+							onChange={handleStateChange}
+						>
 							{STATES.map((state) => (
 								<option key={state} value={state}>
 									{state}
@@ -366,7 +458,7 @@ export const ShippingForm = ({
 							size={input.size}
 							maxLength={input.maxLength}
 							name={input.name}
-							value={cellPhoneNumbers[index]}
+							value={input.value}
 							inputRef={input.ref}
 							onChange={(e) => numberHandler(e, index, "cellPhone")}
 							onKeyDown={(e) => {
@@ -390,7 +482,7 @@ export const ShippingForm = ({
 								size={input.size}
 								maxLength={input.maxLength}
 								name={input.name}
-								value={otherPhoneNumbers[index]}
+								value={input.value}
 								inputRef={input.ref}
 								onChange={(e) => numberHandler(e, index, "otherPhone")}
 								onKeyDown={(e) => {

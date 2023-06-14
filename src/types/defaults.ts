@@ -20,6 +20,7 @@ export type PhoneInputItem = {
 	size: number;
 	maxLength: number;
 	name: string;
+	value: string;
 	ref: React.RefObject<HTMLInputElement>;
 	nextRef?: React.RefObject<HTMLInputElement>;
 };

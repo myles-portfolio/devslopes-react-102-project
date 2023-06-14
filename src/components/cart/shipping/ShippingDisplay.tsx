@@ -20,6 +20,28 @@ interface ShippingDisplayProps extends DisplayProps {
 	cartSubtotal: number;
 	isMsgVisible: boolean;
 	formErrors: string;
+	formValues: {
+		firstName: string;
+		lastName: string;
+		address: string;
+		postalCode: string;
+		country: string;
+		city: string;
+		state: string;
+		cell1: string;
+		cell2: string;
+		cell3: string;
+		other1: string;
+		other2: string;
+		other3: string;
+	};
+	handleFormChange: (
+		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => void;
+	methodValue: string;
+	handleMethodChange: (
+		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => void;
 }
 
 export const ShippingDisplay: React.FC<ShippingDisplayProps> = ({
@@ -38,6 +60,10 @@ export const ShippingDisplay: React.FC<ShippingDisplayProps> = ({
 	setShippingCompleted,
 	isMsgVisible,
 	formErrors,
+	formValues,
+	methodValue,
+	handleFormChange,
+	handleMethodChange,
 }) => {
 	return (
 		<div className="screen-style">
@@ -53,12 +79,16 @@ export const ShippingDisplay: React.FC<ShippingDisplayProps> = ({
 				setOtherPhoneCompleted={setOtherPhoneCompleted}
 				isMsgVisible={isMsgVisible}
 				formErrors={formErrors}
+				formValues={formValues}
+				handleFormChange={handleFormChange}
 			/>
 			<Divider />
 			<ShippingMethod
 				handleExpressShippingChange={handleExpressShippingChange}
 				cartSubtotal={cartSubtotal}
 				setShippingCompleted={setShippingCompleted}
+				methodValue={methodValue}
+				handleMethodChange={handleMethodChange}
 			/>
 			<Button
 				onClick={() => handlePhaseTransition("prev")}

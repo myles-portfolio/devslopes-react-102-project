@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import "@/css/App.css";
 import { LogIn } from "@/components/authentication/LogIn";
 import { SignUp } from "@/components/authentication/SignUp";
@@ -47,6 +47,39 @@ function App() {
 	const [shippingCompleted, setShippingCompleted] = useState(false);
 	const [isMsgVisible, setIsMsgVisible] = useState(false);
 	const [formErrors, setFormErrors] = useState("");
+	const [shippingMethodValue, setShippingMethodValue] = useState("");
+	const [shippingFormValues, setShippingFormValues] = useState({
+		firstName: "",
+		lastName: "",
+		address: "",
+		postalCode: "",
+		country: "",
+		city: "",
+		state: "",
+		cell1: "",
+		cell2: "",
+		cell3: "",
+		other1: "",
+		other2: "",
+		other3: "",
+	});
+
+	const handleShippingFormChange = (
+		event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
+		const { name, value } = event.target;
+		setShippingFormValues((prevValues) => ({
+			...prevValues,
+			[name]: value,
+		}));
+	};
+
+	const handleShippingMethodChange = (
+		event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
+		const { value } = event.target;
+		setShippingMethodValue(value);
+	};
 
 	const formFields = [
 		[firstNameCompleted, "First Name"],
@@ -176,6 +209,10 @@ function App() {
 							setShippingCompleted={setShippingCompletedSetter}
 							isMsgVisible={isMsgVisible}
 							formErrors={formErrors}
+							formValues={shippingFormValues}
+							handleFormChange={handleShippingFormChange}
+							methodValue={shippingMethodValue}
+							handleMethodChange={handleShippingMethodChange}
 						/>
 					</>
 				);

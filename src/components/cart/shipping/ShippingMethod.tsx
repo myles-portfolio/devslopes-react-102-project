@@ -1,24 +1,39 @@
 import "@/css/Shipping.css";
 import "@/css/Form.css";
 import { SectionHeader } from "@/components/common/SectionHeader";
+import { useEffect, useState } from "react";
 
 interface ShippingMethodProps {
 	handleExpressShippingChange: (value: boolean) => void;
 	setShippingCompleted: (value: boolean) => void;
 	cartSubtotal: number;
+	methodValue: string;
+	handleMethodChange: (
+		event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => void;
 }
 
 export const ShippingMethod = ({
 	handleExpressShippingChange,
 	cartSubtotal,
 	setShippingCompleted,
+	handleMethodChange,
+	methodValue,
 }: ShippingMethodProps) => {
+	const [selectedMethod, setSelectedMethod] = useState(methodValue);
+
+	useEffect(() => {
+		setSelectedMethod(methodValue);
+	}, [methodValue]);
+
 	const handleShippingMethodChange = (
 		event: React.ChangeEvent<HTMLInputElement>
 	) => {
-		//I need to confirm that either standard or express has been selected, and if so set setShippingCompleted to true
-		let isExpressShipping = false;
 		const { value } = event.target;
+		setSelectedMethod(value);
+		handleMethodChange(event);
+
+		let isExpressShipping = false;
 		if (value === "express") {
 			isExpressShipping = true;
 		} else if (value !== "express" || cartSubtotal < 300) {
@@ -27,6 +42,7 @@ export const ShippingMethod = ({
 
 		handleExpressShippingChange(isExpressShipping);
 		setShippingCompleted(true);
+		handleMethodChange(event);
 	};
 
 	return (
@@ -39,6 +55,7 @@ export const ShippingMethod = ({
 							type="radio"
 							name="shippingMethod"
 							value="standard"
+							checked={selectedMethod === "standard"}
 							onChange={handleShippingMethodChange}
 						/>
 						STANDARD
@@ -53,6 +70,7 @@ export const ShippingMethod = ({
 							type="radio"
 							name="shippingMethod"
 							value="express"
+							checked={selectedMethod === "express"}
 							onChange={handleShippingMethodChange}
 						/>
 						EXPRESS
