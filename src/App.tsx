@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "@/css/App.css";
 import { LogIn } from "@/components/authentication/LogIn";
 import { SignUp } from "@/components/authentication/SignUp";
@@ -34,7 +34,92 @@ function App() {
 	const [expressShipping, setExpressShipping] = useState(false);
 	const [cartSubtotal, setCartSubtotal] = useState(0);
 
-	//console.log("Subtotal:", cartSubtotal);
+	const [shippingFormComplete, setShippingFormComplete] = useState(false);
+	const [firstNameCompleted, setFirstNameCompleted] = useState(false);
+	const [lastNameCompleted, setLastNameCompleted] = useState(false);
+	const [addressCompleted, setAddressCompleted] = useState(false);
+	const [postalCodeCompleted, setPostalCodeCompleted] = useState(false);
+	const [countryCompleted, setCountryCompleted] = useState(false);
+	const [cityCompleted, setCityCompleted] = useState(false);
+	const [stateCompleted, setStateCompleted] = useState(false);
+	const [cellPhoneCompleted, setCellPhoneCompleted] = useState(false);
+	const [otherPhoneCompleted, setOtherPhoneCompleted] = useState(false);
+	const [shippingCompleted, setShippingCompleted] = useState(false);
+	const [isMsgVisible, setIsMsgVisible] = useState(false);
+	const [formErrors, setFormErrors] = useState("");
+
+	const formFields = [
+		[firstNameCompleted, "First Name"],
+		[lastNameCompleted, "Last Name"],
+		[addressCompleted, "Address"],
+		[postalCodeCompleted, "Postal Code"],
+		[countryCompleted, "Country"],
+		[cityCompleted, "City"],
+		[stateCompleted, "State"],
+		[cellPhoneCompleted, "Cell Phone"],
+		[otherPhoneCompleted, "Other Phone"],
+		[shippingCompleted, "Shipping Method"],
+	];
+
+	useEffect(() => {
+		if (
+			firstNameCompleted &&
+			lastNameCompleted &&
+			addressCompleted &&
+			postalCodeCompleted &&
+			countryCompleted &&
+			cityCompleted &&
+			stateCompleted &&
+			cellPhoneCompleted &&
+			otherPhoneCompleted &&
+			shippingCompleted
+		) {
+			const isComplete = true;
+			setShippingFormComplete(isComplete);
+		}
+	}, [
+		firstNameCompleted,
+		lastNameCompleted,
+		addressCompleted,
+		postalCodeCompleted,
+		countryCompleted,
+		cityCompleted,
+		stateCompleted,
+		cellPhoneCompleted,
+		otherPhoneCompleted,
+		shippingCompleted,
+	]);
+
+	const setFirstNameCompletedSetter = (val: boolean) => {
+		setFirstNameCompleted(val);
+	};
+	const setLastNameCompletedSetter = (val: boolean) => {
+		setLastNameCompleted(val);
+	};
+	const setAddressCompletedSetter = (val: boolean) => {
+		setAddressCompleted(val);
+	};
+	const setPostalCodeCompletedSetter = (val: boolean) => {
+		setPostalCodeCompleted(val);
+	};
+	const setCountryCompletedSetter = (val: boolean) => {
+		setCountryCompleted(val);
+	};
+	const setCityCompletedSetter = (val: boolean) => {
+		setCityCompleted(val);
+	};
+	const setStateCompletedSetter = (val: boolean) => {
+		setStateCompleted(val);
+	};
+	const setCellPhoneCompletedSetter = (val: boolean) => {
+		setCellPhoneCompleted(val);
+	};
+	const setOtherPhoneCompletedSetter = (val: boolean) => {
+		setOtherPhoneCompleted(val);
+	};
+	const setShippingCompletedSetter = (val: boolean) => {
+		setShippingCompleted(val);
+	};
 
 	const handleItemRemoval = (item: CartProps) => {
 		const updatedActiveCart = activeCart.filter(
@@ -79,6 +164,18 @@ function App() {
 							handlePhaseTransition={handlePhaseTransition}
 							handleExpressShippingChange={handleExpressShippingChange}
 							cartSubtotal={cartSubtotal}
+							setFirstNameCompleted={setFirstNameCompletedSetter}
+							setLastNameCompleted={setLastNameCompletedSetter}
+							setAddressCompleted={setAddressCompletedSetter}
+							setPostalCodeCompleted={setPostalCodeCompletedSetter}
+							setCountryCompleted={setCountryCompletedSetter}
+							setCityCompleted={setCityCompletedSetter}
+							setStateCompleted={setStateCompletedSetter}
+							setCellPhoneCompleted={setCellPhoneCompletedSetter}
+							setOtherPhoneCompleted={setOtherPhoneCompletedSetter}
+							setShippingCompleted={setShippingCompletedSetter}
+							isMsgVisible={isMsgVisible}
+							formErrors={formErrors}
 						/>
 					</>
 				);
@@ -184,6 +281,21 @@ function App() {
 		}
 	};
 
+	const checkFormCompletion = () => {
+		const incompleteFields = formFields
+			.filter(([completed]) => !completed)
+			.map(([, fieldName]) => fieldName);
+
+		if (incompleteFields.length > 0) {
+			const errorMessage = `Please fill out the following fields: ${incompleteFields.join(
+				", "
+			)}`;
+			setFormErrors(errorMessage);
+		} else {
+			setFormErrors("");
+		}
+	};
+
 	const handlePhaseTransition = (direction: "prev" | "next") => {
 		switch (currentCheckoutPhase) {
 			case "cartReview":
@@ -195,7 +307,13 @@ function App() {
 				if (direction === "prev") {
 					setCurrentCheckoutPhase("cartReview");
 				} else if (direction === "next") {
-					setCurrentCheckoutPhase("payment");
+					if (shippingFormComplete) {
+						setCurrentCheckoutPhase("payment");
+						checkFormCompletion();
+					} else {
+						checkFormCompletion();
+						setIsMsgVisible(true);
+					}
 				}
 				break;
 			case "payment":
