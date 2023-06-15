@@ -11,3 +11,17 @@
 	margin-top: 2rem;
 	margin-bottom: 1.5rem;
 }
+
+.payment-container {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.payment-container .left {
+	margin-top: 0.5rem;
+}
+
+.payment-container .right {
+	margin-top: 1rem;
+}

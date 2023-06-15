@@ -11,19 +11,20 @@ import { ProductItemsDisplay } from "@/components/cart/product/ProductItemsDispl
 import { ShippingDisplay } from "@/components/cart/shipping/ShippingDisplay";
 import { BillingAddress } from "@/components/cart/summary/BillingAddress";
 
-import { OrderDetails } from "./components/cart/summary/OrderDetails";
+import { OrderDetails } from "@/components/cart/summary/OrderDetails";
 import {
 	Discount,
 	PromoCodeForm,
-} from "./components/cart/summary/PromoCodeForm";
-import { ShipMethod } from "./components/cart/summary/ShipMethod";
-import { Divider } from "./components/common/Divider";
-import { Button } from "./components/common/Button";
+} from "@/components/cart/summary/PromoCodeForm";
+import { ShipMethod } from "@/components/cart/summary/ShipMethod";
+import { Divider } from "@/components/common/Divider";
+import { Button } from "@/components/common/Button";
 import { activeCartData, deletedCartData } from "@/data/cart";
 import { CartPrice } from "@/components/cart/summary/CartPrice";
 import { CartItemsCounter } from "@/components/cart/summary/CartItemsCounter";
-import { CartItemsDisplay } from "./components/cart/summary/CartItemsDisplay";
+import { CartItemsDisplay } from "@/components/cart/summary/CartItemsDisplay";
 import { CartProps } from "@/types/defaults";
+import { priceFormatter } from "./utils/helpers/action.helpers";
 
 function App() {
 	const [displayedForm, setDisplayedForm] = useState("login");
@@ -33,7 +34,7 @@ function App() {
 	const [discount, setDiscount] = useState<Discount | null>(null);
 	const [expressShipping, setExpressShipping] = useState(false);
 	const [cartSubtotal, setCartSubtotal] = useState(0);
-
+	const [cartTotal, setCartTotal] = useState(0);
 	const [shippingFormComplete, setShippingFormComplete] = useState(false);
 	const [firstNameCompleted, setFirstNameCompleted] = useState(false);
 	const [lastNameCompleted, setLastNameCompleted] = useState(false);
@@ -122,6 +123,10 @@ function App() {
 		otherPhoneCompleted,
 		shippingCompleted,
 	]);
+
+	const setCartTotalSetter = (val: number) => {
+		setCartTotal(val);
+	};
 
 	const setFirstNameCompletedSetter = (val: boolean) => {
 		setFirstNameCompleted(val);
@@ -220,7 +225,10 @@ function App() {
 				return (
 					<>
 						<Tracker currentCheckoutPhase={currentCheckoutPhase} />
-						<PaymentDisplay handlePhaseTransition={handlePhaseTransition} />
+						<PaymentDisplay
+							handlePhaseTransition={handlePhaseTransition}
+							setDiscount={setDiscount}
+						/>
 					</>
 				);
 			case "confirmation":
@@ -248,6 +256,7 @@ function App() {
 							discount={discount}
 							isExpressShipping={expressShipping}
 							handleSubTotalChange={handleSubTotalChange}
+							setCartTotal={setCartTotalSetter}
 						/>
 						<Divider />
 					</>
@@ -265,6 +274,7 @@ function App() {
 							discount={discount}
 							isExpressShipping={expressShipping}
 							handleSubTotalChange={handleSubTotalChange}
+							setCartTotal={setCartTotalSetter}
 						/>
 						<Divider />
 					</>
@@ -282,10 +292,11 @@ function App() {
 							discount={discount}
 							isExpressShipping={expressShipping}
 							handleSubTotalChange={handleSubTotalChange}
+							setCartTotal={setCartTotalSetter}
 						/>
 						<Divider />
-						<BillingAddress />
-						<ShipMethod />
+						<BillingAddress formValues={shippingFormValues} />
+						<ShipMethod shippingMethodValue={shippingMethodValue} />
 					</>
 				);
 			case "confirmation":
@@ -370,6 +381,8 @@ function App() {
 		}
 	};
 
+	const formattedTotal = priceFormatter.format(cartTotal);
+
 	const renderCheckoutButton = () => {
 		switch (currentCheckoutPhase) {
 			case "cartReview":
@@ -399,7 +412,7 @@ function App() {
 					<>
 						<Button
 							onClick={() => handlePhaseTransition("next")}
-							text={"Payment"}
+							text={`Pay ${formattedTotal}`}
 							className={"btn-primary checkout"}
 						/>
 					</>

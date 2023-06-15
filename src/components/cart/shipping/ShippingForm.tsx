@@ -200,26 +200,6 @@ export const ShippingForm = ({
 		}
 	};
 
-	// const numberHandler = (
-	// 	e:
-	// 		| React.ChangeEvent<HTMLInputElement>
-	// 		| React.KeyboardEvent<HTMLInputElement>,
-	// 	index: number,
-	// 	type: keyof PhoneInputs
-	// ) => {
-	// 	const validatedValue = e.currentTarget.value.replace(/[^0-9]/g, "");
-	// 	updatePhoneNumbers(index, validatedValue, type);
-	// 	checkMaxLengthAndMoveFocus(index, type);
-
-	// 	if (
-	// 		validatedValue === "" &&
-	// 		e.nativeEvent instanceof KeyboardEvent &&
-	// 		e.nativeEvent.key === "Backspace"
-	// 	) {
-	// 		checkEmptyAndMoveFocus(index, type);
-	// 	}
-	// };
-
 	const numberHandler = (
 		e:
 			| React.ChangeEvent<HTMLInputElement>
@@ -229,34 +209,32 @@ export const ShippingForm = ({
 	) => {
 		const validatedValue = e.currentTarget.value.replace(/[^0-9]/g, "");
 
-		// updatePhoneNumbers(index, validatedValue, type);
-
 		if (type === "cellPhone") {
 			const cell1 = index === 0 ? validatedValue : formValues.cell1;
 			const cell2 = index === 1 ? validatedValue : formValues.cell2;
 			const cell3 = index === 2 ? validatedValue : formValues.cell3;
 			handleFormChange({
 				target: { name: "cell1", value: String(cell1) },
-			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			} as React.ChangeEvent<HTMLInputElement>);
 			handleFormChange({
 				target: { name: "cell2", value: String(cell2) },
-			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			} as React.ChangeEvent<HTMLInputElement>);
 			handleFormChange({
 				target: { name: "cell3", value: String(cell3) },
-			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			} as React.ChangeEvent<HTMLInputElement>);
 		} else if (type === "otherPhone") {
 			const other1 = index === 0 ? validatedValue : formValues.other1;
 			const other2 = index === 1 ? validatedValue : formValues.other2;
 			const other3 = index === 2 ? validatedValue : formValues.other3;
 			handleFormChange({
 				target: { name: "other1", value: String(other1) },
-			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			} as React.ChangeEvent<HTMLInputElement>);
 			handleFormChange({
 				target: { name: "other2", value: String(other2) },
-			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			} as React.ChangeEvent<HTMLInputElement>);
 			handleFormChange({
 				target: { name: "other3", value: String(other3) },
-			} as React.ChangeEvent<HTMLInputElement>); // Explicitly define event type
+			} as React.ChangeEvent<HTMLInputElement>);
 		}
 
 		checkMaxLengthAndMoveFocus(index, type);
